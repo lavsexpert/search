@@ -3,4 +3,12 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_search">Поиск</string>
     <string name="menu_exit">Выход</string>
+    <string name="hello">Добро пожаловать!</string>
+    <string name="google">Google</string>
+    <string name="yandex">Яндекс</string>
+    <string name="bing">Bing</string>
+    <string name="search">Искать в Google</string>
+    <string name="android">Логотип Android</string>
+    <string name="hint">Что будем искать?</string>
+    <string name="search_system">Поисковая система:</string>
 </resources>
