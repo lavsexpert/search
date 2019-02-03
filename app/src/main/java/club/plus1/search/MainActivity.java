@@ -1,23 +1,15 @@
 package club.plus1.search;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseFragmentActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if(savedInstanceState == null){
-            switchFragment(R.layout.fragment_main);
-        }
+    protected Fragment getFragment(){
+        return MainFragment.newInstance(R.layout.fragment_main);
     }
 
     @Override
@@ -46,16 +38,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void switchFragment(int id) {
-        Fragment fragment;
-        fragment = getSupportFragmentManager().findFragmentById(id);
+    protected void switchFragment(int id) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(id);
         if (fragment == null ) {
             fragment = MainFragment.newInstance(id);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer , fragment)
+                    .replace(R.id.fragmentContainer, fragment)
                     .commit();
         } else {
-            Toast.makeText( this, "Не меняем", Toast. LENGTH_SHORT ).show();
+            Toast.makeText(this, "Не меняем", Toast.LENGTH_SHORT ).show();
         }
     }
 }
