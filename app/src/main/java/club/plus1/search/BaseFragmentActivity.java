@@ -25,7 +25,7 @@ public abstract class BaseFragmentActivity extends AppCompatActivity {
     // Переключение фрагментов по переданному layout
     protected void switchFragment(int id) {
         Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-        if (fragment == null ) {
+        if (fragment == null) {
             fragment = MainFragment.newInstance(id);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)

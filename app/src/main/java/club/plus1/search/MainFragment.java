@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -15,16 +16,21 @@ public class MainFragment extends Fragment {
 
     private static final String FRAGMENT = "FRAGMENT";
     private int fragmentID;
+    private SharedPreferencesHelper sharedPreferencesHelper;
 
     // Используется только во фрагменте Настройки
     private RadioGroup radioGroup;
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            Toast.makeText(getActivity(),"Переключатель", Toast.LENGTH_LONG).show();
+            int idSearchSystem = radioGroup.getCheckedRadioButtonId();
+            sharedPreferencesHelper.setSearchSystem(idSearchSystem);
+            if (getActivity() != null) {
+                RadioButton radioSearchSystem = getActivity().findViewById(idSearchSystem);
+                Toast.makeText(getActivity(), radioSearchSystem.getText(), Toast.LENGTH_SHORT).show();
+            }
         }
     };
-
 
     // Используется только во фрагменте Поиск
     private Button buttonSearch;
@@ -56,10 +62,18 @@ public class MainFragment extends Fragment {
             fragmentID = args.getInt(FRAGMENT);
         }
         View v = inflater.inflate(fragmentID, container, false);
+        if (sharedPreferencesHelper == null && getActivity() != null) {
+            sharedPreferencesHelper = new SharedPreferencesHelper(getActivity());
+        }
 
         // Для фрагмента Настройки включаем переключатели
         if (fragmentID == R.layout.fragment_options) {
             radioGroup = v.findViewById(R.id.radioGroup);
+            int idSearchSystem = sharedPreferencesHelper.getSearchSystem();
+            RadioButton radioSearchSystem = v.findViewById(idSearchSystem);
+            if(radioSearchSystem != null) {
+                radioSearchSystem.toggle();
+            }
             radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         }
 
