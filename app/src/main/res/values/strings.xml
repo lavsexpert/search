@@ -11,4 +11,5 @@
     <string name="android">Логотип Android</string>
     <string name="hint">Что будем искать?</string>
     <string name="search_system">Поисковая система:</string>
+    <string name="search_in">Искать в %s</string>
 </resources>

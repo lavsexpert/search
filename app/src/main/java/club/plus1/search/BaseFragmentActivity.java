@@ -18,6 +18,7 @@ public abstract class BaseFragmentActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, getFragment())
+                    .addToBackStack(BaseFragmentActivity.class.getName())
                     .commit();
         }
     }
@@ -29,9 +30,20 @@ public abstract class BaseFragmentActivity extends AppCompatActivity {
             fragment = MainFragment.newInstance(id);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, fragment)
+                    .addToBackStack(BaseFragmentActivity.class.getName())
                     .commit();
         } else {
             Toast.makeText(this, "Не меняем", Toast.LENGTH_SHORT ).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() == 1){
+            finish();
+        } else {
+            fragmentManager.popBackStack();
         }
     }
 

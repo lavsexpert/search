@@ -1,7 +1,6 @@
 package club.plus1.search;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 public class MainFragment extends Fragment {
 
@@ -96,7 +94,8 @@ public class MainFragment extends Fragment {
         if (fragmentID == R.layout.fragment_search) {
             buttonSearch = v.findViewById(R.id.buttonSearch);
             buttonSearch.setOnClickListener(onClickListener);
-            buttonSearch.setText(String.format("Искать в %s", searchSystem.Name));
+            buttonSearch.setText(String.format(v.getResources().getString(R.string.search_in),
+                    searchSystem.Name));
         }
 
         return v;
