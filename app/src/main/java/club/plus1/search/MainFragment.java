@@ -5,9 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +16,7 @@ public class MainFragment extends Fragment {
     private static final String FRAGMENT = "FRAGMENT";
     private int fragmentID;
 
+    // Используется только во фрагменте Настройки
     private RadioGroup radioGroup;
     private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
@@ -27,6 +25,8 @@ public class MainFragment extends Fragment {
         }
     };
 
+
+    // Используется только во фрагменте Поиск
     private Button buttonSearch;
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -35,6 +35,7 @@ public class MainFragment extends Fragment {
         }
     };
 
+    // Создание экземпляра фрагмента с передачей ему соответствующего layout
     public static MainFragment newInstance(int id) {
         Bundle args = new Bundle();
         args.putInt(FRAGMENT, id);
@@ -44,6 +45,7 @@ public class MainFragment extends Fragment {
         return fragment;
     }
 
+    // Создание View фрагмента с подключением обработчиков и интерфейсных элементов
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,10 +56,14 @@ public class MainFragment extends Fragment {
             fragmentID = args.getInt(FRAGMENT);
         }
         View v = inflater.inflate(fragmentID, container, false);
+
+        // Для фрагмента Настройки включаем переключатели
         if (fragmentID == R.layout.fragment_options) {
             radioGroup = v.findViewById(R.id.radioGroup);
             radioGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         }
+
+        // Для фрагмента Поиск включаем кнопку поиска
         if (fragmentID == R.layout.fragment_search) {
             buttonSearch = v.findViewById(R.id.buttonSearch);
             buttonSearch.setOnClickListener(onClickListener);
@@ -66,6 +72,7 @@ public class MainFragment extends Fragment {
         return v;
     }
 
+    // Когда фрагмент уже создан
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

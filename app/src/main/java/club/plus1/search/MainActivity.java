@@ -8,10 +8,12 @@ import android.widget.Toast;
 
 public class MainActivity extends BaseFragmentActivity {
 
+    // Создание и получение фрагмента первой страницы
     protected Fragment getFragment(){
         return MainFragment.newInstance(R.layout.fragment_main);
     }
 
+    // Показ меню
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -19,6 +21,7 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Выбор пунктов меню
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -38,15 +41,4 @@ public class MainActivity extends BaseFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void switchFragment(int id) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-        if (fragment == null ) {
-            fragment = MainFragment.newInstance(id);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, fragment)
-                    .commit();
-        } else {
-            Toast.makeText(this, "Не меняем", Toast.LENGTH_SHORT ).show();
-        }
-    }
 }
