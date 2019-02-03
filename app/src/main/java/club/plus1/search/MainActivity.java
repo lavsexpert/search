@@ -15,23 +15,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(savedInstanceState != null){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, getFragment(R.layout.fragment_main))
-                    .commit();
+        if(savedInstanceState == null){
+            switchFragment(R.layout.fragment_main);
         }
-    }
-
-    protected Fragment getFragment(int id){
-        Fragment fragment;
-        fragment = getSupportFragmentManager().findFragmentById(id);
-        if (fragment == null ) {
-            fragment = MainFragment.newInstance(id);
-        } else {
-            Toast. makeText ( this , "Не меняем" , Toast. LENGTH_SHORT ).show();
-        }
-        return fragment;
     }
 
     @Override
